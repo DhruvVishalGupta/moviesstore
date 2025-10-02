@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="p-3">
+  <div class="container">
+    <div class="row mt-3">
+      <div class="col-md-8 mx-auto">
+        <h2>Create Movie Petition</h2>
+        <hr />
+        
+        {% if messages %}
+        <div class="mb-3">
+          {% for message in messages %}
+          <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+          {% endfor %}
+        </div>
+        {% endif %}
+        
+        <div class="card">
+          <div class="card-body">
+            <form method="POST">
+              {% csrf_token %}
+              <div class="mb-3">
+                <label for="title" class="form-label">Movie Title</label>
+                <input type="text" class="form-control" id="title" name="title" 
+                       placeholder="Enter the movie title you'd like to see added" required>
+                <div class="form-text">Be specific about the movie title and year if applicable.</div>
+              </div>
+              
+              <div class="mb-3">
+                <label for="description" class="form-label">Description</label>
+                <textarea class="form-control" id="description" name="description" rows="5" 
+                          placeholder="Explain why this movie should be added to our catalog. Include details like genre, director, or why it's popular." required></textarea>
+                <div class="form-text">Provide a compelling reason why this movie should be added to our store.</div>
+              </div>
+              
+              <div class="d-flex justify-content-between">
+                <a href="{% url 'movies.petitions' %}" class="btn btn-outline-secondary">
+                  <i class="fas fa-arrow-left"></i> Back to Petitions
+                </a>
+                <button type="submit" class="btn bg-dark text-white">
+                  <i class="fas fa-plus"></i> Create Petition
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+        
+        <div class="mt-4">
+          <div class="alert alert-info">
+            <h5><i class="fas fa-info-circle"></i> Tips for a successful petition:</h5>
+            <ul class="mb-0">
+              <li>Use the exact movie title and year</li>
+              <li>Explain why the movie is popular or important</li>
+              <li>Include genre information</li>
+              <li>Mention the director or main actors if relevant</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}
